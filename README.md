@@ -1,14 +1,11 @@
 # CommerceCore
 
-
-# Project Name
-
 ## Installation Guide
 
 ### Prerequisites
 Ensure you have [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed on your system.
 
-### Step 3: Install TypeScript and Dependencies
+###  Install TypeScript and Dependencies
 To install TypeScript and its Node.js type definitions, run the following command in your terminal:
 
 ```bash
