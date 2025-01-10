@@ -10,8 +10,15 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     description: String!
     countInStock: Int!
     imageUrl: String!
-    categoryId: ID!
-    category: Category
+    category: Category!
+  }
+
+  type User{
+    id: ID!
+    name: String!
+    email: String!
+    isAdmin: Boolean!
+    createdAt: String!
   }
 
   type Category {
@@ -22,10 +29,15 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     }
 
     type Cart {
-      name: String!
+      id: ID!
+      user: User!
+      cartItems: [CartItems!]!
+    }
+
+    type CartItems{
+      id: ID!
+      product: Product!
       quantity: Int!
-      price: Float!
-      product: Product! 
     }
 
     type OrderItem{
@@ -41,19 +53,15 @@ exports.typeDefs = (0, apollo_server_1.gql) `
       country: String!
     }
 
-    input ShippingAddressInput{
-      address: String!
-      city: String!
-      postalCode: String!
-      country: String!
-    }
-
+   
     type User{
       id: ID!
       name: String!
       email: String!
       isAdmin: Boolean!
+      createdAt: String!
     }
+
    type Order{
       id: ID!
       shippingAddress: ShippingAddress!
@@ -89,13 +97,11 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     updatedAt: String
    }
 
-  type Query{
-    products: [Product!]!
-    product(id: ID!): Product
-    categories: [Category!]!
-    category(id: ID!): Category
-    cart: [Cart!]!
-    order: [Order!]!
+  input UserInput{
+    name: String!
+    email: String!
+    password: String!
+    isAdmin: Boolean!
   }
 
   input OrderInput{
@@ -106,12 +112,20 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     shippingPrice: Float!
     taxPrice: Float!
     totalPrice: Float!
-    user: ID!
+    userId: ID!
     isPaid: Boolean!
     paidAt: String
     isDelivered: Boolean!
     deliveredAt: String
   }
+
+  input ShippingAddressInput{
+      address: String!
+      city: String!
+      postalCode: String!
+      country: String!
+  }
+
 
   input OrderItemInput{
     product: ID!
@@ -124,7 +138,8 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     description: String!
     countInStock: Int!
     imageUrl: String!
-    categoryId: ID!
+    categoryId: ID
+    userId: ID!
   }
 
   input CategoryInput{
@@ -133,7 +148,22 @@ exports.typeDefs = (0, apollo_server_1.gql) `
     imageUrl: String!
   }
 
+  type Query{
+    users: [User!]!
+    user(id: ID!): User
+    products: [Product!]!
+    product(id: ID!): Product
+    categories: [Category!]!
+    category(id: ID!): Category
+    cart: [Cart!]!
+    order: [Order!]!
+  }
+
+
   type Mutation{
+    createUser(user: UserInput!): User!
+    updateUser(id: ID!, user: UserInput!): User!
+    deleteUser(id: ID!): User!
     addToCart(productId: ID!, quantity: Int!): Cart!
     removeFromCart(productId: ID!): Cart!
     createOrder(order: OrderInput!): Order!

@@ -2,7 +2,8 @@ import mongoose, {Schema, Document} from "mongoose";
 import { orderStatus } from "../types";
 
 export interface orderDocument extends Document{
-    user: string;
+    user: object;
+    userId: string;
     orderItems: [
         {
             name: string;
@@ -37,7 +38,12 @@ export interface orderDocument extends Document{
 
 const orderSchema:Schema=new Schema({
     user:{
-        type: String,
+        type: Object,
+        required: true,
+    },
+    userId:{
+        type: Schema.Types.ObjectId,
+        ref: "User",
         required: true,
     },
     orderItems:[

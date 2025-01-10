@@ -5,9 +5,11 @@ const product_resolver_1 = require("./product.resolver");
 const order_resolver_1 = require("./order.resolver");
 const category_resolver_1 = require("./category.resolver");
 const cart_resolver_1 = require("./cart.resolver");
+const user_resolver_1 = require("./user.resolver");
 exports.resolvers = [
     product_resolver_1.productResolvers,
     order_resolver_1.orderResolvers,
     category_resolver_1.categoryResolvers,
     cart_resolver_1.cartResolvers,
+    user_resolver_1.userResolvers
 ];

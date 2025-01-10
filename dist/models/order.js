@@ -38,7 +38,12 @@ const mongoose_1 = __importStar(require("mongoose"));
 const types_1 = require("../types");
 const orderSchema = new mongoose_1.Schema({
     user: {
-        type: String,
+        type: Object,
+        required: true,
+    },
+    userId: {
+        type: mongoose_1.Schema.Types.ObjectId,
+        ref: "User",
         required: true,
     },
     orderItems: [

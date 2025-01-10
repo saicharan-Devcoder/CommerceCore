@@ -10,19 +10,35 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.orderResolvers = void 0;
+const graphql_1 = require("graphql");
 const order_1 = require("../models/order");
 exports.orderResolvers = {
     Query: {
         order: () => __awaiter(void 0, void 0, void 0, function* () {
-            return yield order_1.Order.find();
+            try {
+                return yield order_1.Order.find();
+            }
+            catch (error) {
+                throw new graphql_1.GraphQLError(`Error in fetching order: ${error.message}`);
+            }
         }),
     },
     Mutation: {
         createOrder: (_1, _a) => __awaiter(void 0, [_1, _a], void 0, function* (_, { order }) {
-            return yield order_1.Order.create(order);
+            try {
+                return yield order_1.Order.create(order);
+            }
+            catch (error) {
+                throw new graphql_1.GraphQLError(`Error in creating order: ${error.message}`);
+            }
         }),
         updateOrder: (_1, _a) => __awaiter(void 0, [_1, _a], void 0, function* (_, { id, order }) {
-            return yield order_1.Order.findByIdAndUpdate(id, order, { new: true });
+            try {
+                return yield order_1.Order.findByIdAndUpdate(id, order, { new: true });
+            }
+            catch (error) {
+                throw new graphql_1.GraphQLError(`Error in updating order: ${error.message}`);
+            }
         }),
     }
 };
