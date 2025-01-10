@@ -17,7 +17,7 @@ const startServer = () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, db_1.connectDB)();
     const server = new apollo_server_1.ApolloServer({ typeDefs: schema_1.typeDefs, resolvers: resolvers_1.resolvers });
     server.listen({
-        port: process.env.PORT || 4000
+        port: 8000
     }).then(({ url }) => {
         console.log(`Server ready at ${url}`);
     }).catch((error) => {

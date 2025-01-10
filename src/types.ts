@@ -6,3 +6,4 @@ export enum orderStatus {
     PickedUp = "PickedUp",
     Delivered = "Delivered",
 }
+

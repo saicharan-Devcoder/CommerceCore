@@ -1,4 +1,4 @@
-import {gql} from 'apollo-server';
+import { gql } from 'apollo-server';
 
 export const typeDefs = gql`
   type Product {
@@ -8,7 +8,8 @@ export const typeDefs = gql`
     description: String!
     countInStock: Int!
     imageUrl: String!
-    category: Category!
+    categoryId: ID!
+    category: Category
   }
 
   type Category {
@@ -25,9 +26,34 @@ export const typeDefs = gql`
       product: Product! 
     }
 
+    type OrderItem{
+      id: ID!
+      product: Product!
+      quantity: Int!
+    }
+
+    type ShippingAddress{
+      address: String!
+      city: String!
+      postalCode: String!
+      country: String!
+    }
+
+    input ShippingAddressInput{
+      address: String!
+      city: String!
+      postalCode: String!
+      country: String!
+    }
+
+    type User{
+      id: ID!
+      name: String!
+      email: String!
+      isAdmin: Boolean!
+    }
    type Order{
       id: ID!
-      orderItems: [OrderItem!]!
       shippingAddress: ShippingAddress!
       paymentMethod: String!
       itemsPrice: Float!
@@ -43,6 +69,24 @@ export const typeDefs = gql`
       updatedAt: String!
    }
 
+   type Order{
+    id: ID!
+    orderItems: [OrderItem!]!
+    shippingAddress: ShippingAddress!
+    paymentMethod: String!
+    itemsPrice: Float!
+    shippingPrice: Float!
+    taxPrice: Float!
+    totalPrice: Float!
+    user: User!
+    isPaid: Boolean!
+    paidAt: String
+    isDelivered: Boolean!
+    deliveredAt: String
+    createdAt: String!
+    updatedAt: String
+   }
+
   type Query{
     products: [Product!]!
     product(id: ID!): Product
@@ -50,6 +94,41 @@ export const typeDefs = gql`
     category(id: ID!): Category
     cart: [Cart!]!
     order: [Order!]!
+  }
+
+  input OrderInput{
+    orderItems: [OrderItemInput!]!
+    shippingAddress: ShippingAddressInput!
+    paymentMethod: String!
+    itemsPrice: Float!
+    shippingPrice: Float!
+    taxPrice: Float!
+    totalPrice: Float!
+    user: ID!
+    isPaid: Boolean!
+    paidAt: String
+    isDelivered: Boolean!
+    deliveredAt: String
+  }
+
+  input OrderItemInput{
+    product: ID!
+    quantity: Int!
+  }
+
+  input ProductInput{
+    name: String!
+    price: Float!
+    description: String!
+    countInStock: Int!
+    imageUrl: String!
+    categoryId: ID!
+  }
+
+  input CategoryInput{
+    name: String!
+    description: String!
+    imageUrl: String!
   }
 
   type Mutation{

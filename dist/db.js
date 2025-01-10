@@ -14,9 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.connectDB = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
+const mongodb_memory_server_1 = require("mongodb-memory-server");
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const conn = yield mongoose_1.default.connect("mongodb://localhost:27017/your_db_name", {});
+        const mongoServer = yield mongodb_memory_server_1.MongoMemoryServer.create();
+        const uri = mongoServer.getUri();
+        const conn = yield mongoose_1.default.connect(uri, {});
         console.log(`MongoDB Connected: ${conn.connection.host}`);
     }
     catch (error) {
