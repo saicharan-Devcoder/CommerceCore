@@ -1,0 +1,33 @@
+{
+  "name": "commercecore",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "nodemon src/index.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saicharan-Devcoder/CommerceCore.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saicharan-Devcoder/CommerceCore/issues"
+  },
+  "homepage": "https://github.com/saicharan-Devcoder/CommerceCore#readme",
+  "devDependencies": {
+    "@types/node": "^22.10.5",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.7.3"
+  },
+  "dependencies": {
+    "apollo-server": "^3.13.0",
+    "dotenv": "^16.4.7",
+    "graphql": "^16.10.0",
+    "mongoose": "^8.9.3"
+  }
+}
